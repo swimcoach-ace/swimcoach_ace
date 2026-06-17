@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ace — Swim Coach Dubai</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+
+  :root{
+    --deep:     #0B3D5E;
+    --mid:      #1A6A8A;
+    --light:    #5FB3CC;
+    --foam:     #E9F6FA;
+    --ink:      #0D1B26;
+    --muted:    #5C7A8A;
+    --gold:     #E8A430;
+    --surface:  #F7FBFC;
+    --white:    #FFFFFF;
+  }
+
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--surface);
+    color:var(--ink);
+    display:flex;
+    justify-content:center;
+  }
+
+  .page{
+    width:100%;
+    max-width:420px;
+    min-height:100vh;
+    background:var(--white);
+    position:relative;
+  }
+
+  /* ── HEADER ── */
+  .header{
+    background:var(--deep);
+    padding:48px 24px 64px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .ripple{
+    position:absolute;
+    border-radius:50%;
+    border:1.5px solid rgba(255,255,255,0.12);
+  }
+  .ripple1{ width:280px; height:280px; top:-140px; right:-90px; }
+  .ripple2{ width:180px; height:180px; bottom:-100px; left:-60px; }
+
+  .avatar{
+    width:84px; height:84px;
+    border-radius:50%;
+    background:linear-gradient(145deg,var(--light),var(--mid));
+    margin:0 auto 16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Fraunces',serif;
+    font-size:34px;
+    color:var(--white);
+    border:3px solid rgba(255,255,255,0.25);
+    position:relative;
+    z-index:1;
+  }
+  .name{
+    font-family:'Fraunces',serif;
+    font-size:26px;
+    color:var(--white);
+    margin-bottom:6px;
+    position:relative; z-index:1;
+  }
+  .role{
+    font-size:13px;
+    color:var(--light);
+    letter-spacing:0.04em;
+    margin-bottom:14px;
+    position:relative; z-index:1;
+  }
+  .bio-line{
+    font-size:13.5px;
+    color:rgba(255,255,255,0.7);
+    max-width:280px;
+    margin:0 auto;
+    line-height:1.55;
+    position:relative; z-index:1;
+  }
+
+  /* ── SOCIAL ROW ── */
+  .socials{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top:20px;
+    position:relative; z-index:1;
+  }
+  .social-pill{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    background:rgba(255,255,255,0.1);
+    border:1px solid rgba(255,255,255,0.18);
+    color:var(--white);
+    font-size:12px;
+    font-weight:500;
+    padding:7px 14px;
+    border-radius:100px;
+    text-decoration:none;
+  }
+
+  /* ── BODY ── */
+  .body{ padding:28px 22px 40px; }
+
+  .section-label{
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--mid);
+    margin-bottom:14px;
+  }
+
+  /* Primary CTA */
+  .cta-primary{
+    display:block;
+    text-align:center;
+    background:var(--deep);
+    color:var(--white);
+    text-decoration:none;
+    padding:16px;
+    border-radius:14px;
+    font-weight:600;
+    font-size:15px;
+    margin-bottom:8px;
+  }
+  .cta-primary .sub{
+    display:block;
+    font-size:11.5px;
+    font-weight:400;
+    color:var(--light);
+    margin-top:3px;
+  }
+
+  /* ── PRICING CARDS ── */
+  .pricing{ margin-top:30px; }
+  .price-card{
+    border:1.5px solid var(--foam);
+    border-radius:14px;
+    padding:18px 18px 20px;
+    margin-bottom:12px;
+    position:relative;
+  }
+  .price-card.featured{
+    border-color:var(--mid);
+    background:linear-gradient(180deg,var(--foam),var(--white));
+  }
+  .price-card-badge{
+    position:absolute;
+    top:-10px; right:16px;
+    background:var(--gold);
+    color:var(--ink);
+    font-size:9.5px;
+    font-weight:700;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    padding:4px 10px;
+    border-radius:100px;
+  }
+  .price-card-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-bottom:6px;
+  }
+  .price-card-name{
+    font-family:'Fraunces',serif;
+    font-size:17px;
+    color:var(--ink);
+  }
+  .price-card-amount{
+    font-family:'Fraunces',serif;
+    font-size:19px;
+    color:var(--deep);
+    white-space:nowrap;
+  }
+  .price-card-amount span{
+    font-family:'Inter',sans-serif;
+    font-size:11px;
+    font-weight:500;
+    color:var(--muted);
+  }
+  .price-card-desc{
+    font-size:12.5px;
+    color:var(--muted);
+    line-height:1.5;
+    margin-bottom:10px;
+  }
+  .price-card-meta{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+  }
+  .meta-chip{
+    font-size:10.5px;
+    font-weight:600;
+    color:var(--mid);
+    background:var(--foam);
+    padding:4px 9px;
+    border-radius:100px;
+  }
+  .price-card.featured .meta-chip{
+    background:rgba(26,106,138,0.12);
+  }
+
+  /* ── ONLINE COACHING ── */
+  .online-card{
+    background:var(--deep);
+    border-radius:14px;
+    padding:20px;
+    margin-top:6px;
+    color:var(--white);
+  }
+  .online-card-top{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:8px;
+  }
+  .online-dot{
+    width:7px;height:7px;border-radius:50%;
+    background:#4ADE80;
+    box-shadow:0 0 0 3px rgba(74,222,128,0.2);
+  }
+  .online-label{
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--light);
+  }
+  .online-title{
+    font-family:'Fraunces',serif;
+    font-size:18px;
+    margin-bottom:6px;
+  }
+  .online-desc{
+    font-size:12.5px;
+    color:rgba(255,255,255,0.65);
+    line-height:1.55;
+    margin-bottom:14px;
+  }
+  .online-price{
+    font-family:'Fraunces',serif;
+    font-size:20px;
+    margin-bottom:14px;
+  }
+  .online-price span{
+    font-family:'Inter',sans-serif;
+    font-size:11px;
+    color:rgba(255,255,255,0.5);
+  }
+  .cta-secondary{
+    display:block;
+    text-align:center;
+    background:var(--white);
+    color:var(--deep);
+    text-decoration:none;
+    padding:13px;
+    border-radius:10px;
+    font-weight:600;
+    font-size:13.5px;
+  }
+
+  /* ── LINKS LIST ── */
+  .links{ margin-top:30px; display:flex; flex-direction:column; gap:10px; }
+  .link-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border:1.5px solid var(--foam);
+    border-radius:12px;
+    padding:14px 16px;
+    text-decoration:none;
+    color:var(--ink);
+  }
+  .link-row-text{ font-size:13.5px; font-weight:500; }
+  .link-row-sub{ font-size:11px; color:var(--muted); margin-top:2px; }
+  .link-arrow{ color:var(--mid); font-size:16px; }
+
+  footer{
+    text-align:center;
+    padding:24px;
+    font-size:11px;
+    color:var(--muted);
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="ripple ripple1"></div>
+    <div class="ripple ripple2"></div>
+    <div class="avatar">A</div>
+    <div class="name">Coach Ace</div>
+    <div class="role">SWIM INSTRUCTOR · DUBAI</div>
+    <p class="bio-line">Helping adult beginners go from scared of water to swimming deep water — in as little as one day.</p>
+    <div class="socials">
+      <a href="#" class="social-pill">TikTok</a>
+      <a href="#" class="social-pill">Instagram</a>
+      <a href="#" class="social-pill">Facebook</a>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <a href="#" class="cta-primary">
+      Book a Pool Session
+      <span class="sub">WhatsApp · Instant reply</span>
+    </a>
+
+    <!-- PRICING -->
+    <div class="pricing">
+      <p class="section-label">In-Person Packages · Dubai</p>
+
+      <div class="price-card">
+        <div class="price-card-top">
+          <div class="price-card-name">Survival Swim</div>
+          <div class="price-card-amount">AED 349</div>
+        </div>
+        <p class="price-card-desc">Float, tread &amp; swim deep water — all in one day.</p>
+        <div class="price-card-meta">
+          <span class="meta-chip">3 sessions</span>
+          <span class="meta-chip">1 day</span>
+          <span class="meta-chip">45 min each</span>
+        </div>
+      </div>
+
+      <div class="price-card featured">
+        <div class="price-card-badge">Most Popular</div>
+        <div class="price-card-top">
+          <div class="price-card-name">Basic Swim</div>
+          <div class="price-card-amount">AED 899</div>
+        </div>
+        <p class="price-card-desc">Survival skills + stroke technique over 3 days.</p>
+        <div class="price-card-meta">
+          <span class="meta-chip">9 sessions</span>
+          <span class="meta-chip">3 days</span>
+          <span class="meta-chip">45 min each</span>
+        </div>
+      </div>
+
+      <div class="price-card">
+        <div class="price-card-top">
+          <div class="price-card-name">Private Swim</div>
+          <div class="price-card-amount">AED 1,990 <span>/ 10 sessions</span></div>
+        </div>
+        <p class="price-card-desc">1-on-1 coaching, your pace. +1 session free.</p>
+        <div class="price-card-meta">
+          <span class="meta-chip">10+1 sessions</span>
+          <span class="meta-chip">5 or 10 days</span>
+          <span class="meta-chip">From AED 230/session</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ONLINE COACHING -->
+    <p class="section-label" style="margin-top:30px;">New · Online Coaching</p>
+    <div class="online-card">
+      <div class="online-card-top">
+        <div class="online-dot"></div>
+        <span class="online-label">Now booking</span>
+      </div>
+      <div class="online-title">Live Online Stroke Coaching</div>
+      <p class="online-desc">Anywhere with a pool and a phone. I watch your technique on video call and correct it in real time.</p>
+      <div class="online-price">AED 150 <span>/ session</span></div>
+      <a href="#" class="cta-secondary">Book Online Session</a>
+    </div>
+
+    <!-- LINKS -->
+    <div class="links">
+      <p class="section-label" style="margin-bottom:0;">More</p>
+      <a href="#" class="link-row">
+        <div>
+          <div class="link-row-text">Watch transformations</div>
+          <div class="link-row-sub">Student before/afters</div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+      <a href="#" class="link-row">
+        <div>
+          <div class="link-row-text">Free swim tips</div>
+          <div class="link-row-sub">Latest TikToks &amp; Reels</div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+      <a href="#" class="link-row">
+        <div>
+          <div class="link-row-text">Send a message</div>
+          <div class="link-row-sub">Questions, custom requests</div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+    </div>
+
+  </div>
+
+  <footer>Coach Ace · Dubai, UAE</footer>
+</div>
+
+</body>
+</html>
